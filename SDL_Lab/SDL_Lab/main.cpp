@@ -1,20 +1,5 @@
-//#include <iostream>
-//#include <SDL.h>
-
-//int main(int argc, char *argsv[]) {
-
-	//if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-
-		//std::cout << "SDL could not initialise! SDL Error: " << SDL_GetError() << std::endl;
-	//}
-
-//	return EXIT_SUCCESS;
-//}
-
-/*This source code copyrighted by Lazy Foo' Productions (2004-2015)
-and may not be redistributed without written permission.*/
-
 //Using SDL and standard IO
+#include "InputHandler.h"
 #include <SDL.h>
 #include <stdio.h>
 
@@ -24,6 +9,10 @@ const int SCREEN_HEIGHT = 480;
 
 int main(int argc, char* args[])
 {
+	SDL_Event event;
+	InputHandler handler = InputHandler();
+	int quit = 0;
+
 	//The window we'll be rendering to
 	SDL_Window* window = NULL;
 
@@ -56,6 +45,14 @@ int main(int argc, char* args[])
 
 			//Wait two seconds
 			SDL_Delay(2000);
+		}
+	}
+
+	while (!quit) 
+	{
+		while (SDL_PollEvent(&event)) 
+		{
+			handler.handleInput(event);
 		}
 	}
 

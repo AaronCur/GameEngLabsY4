@@ -1,10 +1,10 @@
 #pragma once
 #include "Command.h"
-class JumpCommand : public Command
+class FireCommand : public Command
 {
 public:
 	virtual void execute()
 	{
-		std::cout << "jump" << std::endl;
+		std::cout << "Fire" << std::endl;
 	}
 };

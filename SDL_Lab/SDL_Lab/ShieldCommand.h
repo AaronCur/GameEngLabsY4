@@ -5,6 +5,6 @@ class ShieldCommand : public Command
 public:
 	virtual void execute()
 	{
-		shield();
+		std::cout << "Shield" << std::endl;
 	}
 };

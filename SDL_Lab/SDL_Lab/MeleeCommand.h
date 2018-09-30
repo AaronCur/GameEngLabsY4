@@ -5,6 +5,6 @@ class MeleeCommand : public Command
 public:
 	virtual void execute()
 	{
-		melee();
+		std::cout << "melee" << std::endl;
 	}
 };

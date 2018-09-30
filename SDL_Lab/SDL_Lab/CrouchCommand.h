@@ -5,6 +5,6 @@ class CrouchCommand : public Command
 public:
 	virtual void execute()
 	{
-		crouch();
+		std::cout << "Crouch" << std::endl;
 	}
 };
