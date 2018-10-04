@@ -11,5 +11,6 @@ public:
 	{
 		std::cout << "Going from Jumping to Idling" << std::endl;
 		a->setCurrent(new Idle());
+		delete this;
 	}
 };
