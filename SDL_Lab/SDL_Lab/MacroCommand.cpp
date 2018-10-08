@@ -38,7 +38,14 @@ void MacroCommand::execute()
 
 void MacroCommand::undo()
 {
+	commands.pop_back();
+	std::cout << "\n" << std::endl;
+	std::cout << "Undo" << std::endl;
+}
+
+void MacroCommand::clear()
+{
 	commands.clear();
 	std::cout << "\n" << std::endl;
-	std::cout << "Undo all" << std::endl;
+	std::cout << "Clear all" << std::endl;
 }
