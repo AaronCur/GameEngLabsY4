@@ -7,4 +7,8 @@ public:
 	{
 		std::cout << "Shield" << std::endl;
 	}
+	/*virtual void Delete()
+	{
+		std::cout << "Shield Removed" << std::endl;
+	}*/
 };

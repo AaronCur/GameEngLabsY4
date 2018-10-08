@@ -7,4 +7,8 @@ public:
 	{
 		std::cout << "Crouch" << std::endl;
 	}
+	/*virtual void Delete()
+	{
+		std::cout << "Crouch Removed" << std::endl;
+	}*/
 };

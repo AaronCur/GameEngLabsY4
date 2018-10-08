@@ -5,6 +5,10 @@ class JumpCommand : public Command
 public:
 	virtual void execute()
 	{
-		std::cout << "jump" << std::endl;
+		std::cout << "Jump" << std::endl;
 	}
+	/*virtual void Delete()
+	{
+		std::cout << "Jump Removed" << std::endl;
+	}*/
 };
