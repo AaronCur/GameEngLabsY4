@@ -38,9 +38,33 @@ void MacroCommand::execute()
 
 void MacroCommand::undo()
 {
-	commands.pop_back();
 	std::cout << "\n" << std::endl;
-	std::cout << "Undo" << std::endl;
+	if (commands.size() > 0) {
+
+		(*commands.rbegin())->undo();
+		redoCommands.push_back(*commands.rbegin());
+		commands.pop_back();
+	}
+	else {
+		std::cout << "Command List Empty" << std::endl;
+	}
+	
+	
+}
+void MacroCommand::redo()
+{
+	std::cout << "\n" << std::endl;
+	if (redoCommands.size() > 0) {
+
+		(*redoCommands.rbegin())->redo();
+		commands.push_back(*redoCommands.rbegin());
+		redoCommands.pop_back();
+	}
+	else {
+		std::cout << "No more commands to Redo" << std::endl;
+	}
+
+
 }
 
 void MacroCommand::clear()

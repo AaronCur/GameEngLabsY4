@@ -48,27 +48,30 @@ void InputHandler::handleInput(SDL_Event & event)
 			macro->execute();
 			break;
 		case SDLK_6:
-		//	button1_->Delete();
+			//button1_->remove();
 			macro->remove(button1_);
 			break;
 		case SDLK_7:
-			//button2_->Delete();
+			//button2_->remove();
 			macro->remove(button2_);
 			break;
 		case SDLK_8:
-		//	button3_->Delete();
+			//button3_->remove();
 			macro->remove(button3_);
 			break;
 		case SDLK_9:
-		//	button4_->Delete();
+			//button4_->remove();
 			macro->remove(button4_);
 			break;
 		case SDLK_0:
-		//	button5_->Delete();
+			//button5_->remove();
 			macro->remove(button5_);
 			break;
 		case SDLK_u:
 			macro->undo();
+			break;
+		case SDLK_r:
+			macro->redo();
 			break;
 		case SDLK_c:
 			macro->clear();

@@ -6,9 +6,13 @@ public:
 	virtual void execute()
 	{
 		std::cout << "Crouch" << std::endl;
-	}
-	/*virtual void Delete()
+	};
+	virtual void undo()
 	{
-		std::cout << "Crouch Removed" << std::endl;
-	}*/
+		std::cout << "Undo Crouch" << std::endl;
+	};
+	virtual void redo()
+	{
+		std::cout << "Redo Crouch" << std::endl;
+	};
 };

@@ -5,7 +5,9 @@ class Command
 public:
 	virtual ~Command() {}
 	virtual void execute() = 0;
-	//virtual void Delete() = 0;
+	//virtual void remove() = 0;
+	virtual void undo() = 0;
+	virtual void redo() = 0;
 
 protected:
 	Command() {}

@@ -6,9 +6,13 @@ public:
 	virtual void execute()
 	{
 		std::cout << "Jump" << std::endl;
-	}
-	/*virtual void Delete()
+	};
+	virtual void undo()
 	{
-		std::cout << "Jump Removed" << std::endl;
-	}*/
+		std::cout << "Undo Jump" << std::endl;
+	};
+	virtual void redo()
+	{
+		std::cout << "Redo Jump" << std::endl;
+	};
 };

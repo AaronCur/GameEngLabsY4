@@ -6,9 +6,13 @@ public:
 	virtual void execute()
 	{
 		std::cout << "Fire" << std::endl;
-	}
-	/*virtual void Delete()
+	};
+	virtual void undo()
 	{
-		std::cout << "Fire Removed" << std::endl;
-	}*/
+		std::cout << "Undo Fire" << std::endl;
+	};
+	virtual void redo()
+	{
+		std::cout << "Redo Fire" << std::endl;
+	};
 };
