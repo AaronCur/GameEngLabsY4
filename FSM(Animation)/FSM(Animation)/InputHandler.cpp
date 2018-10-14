@@ -16,7 +16,7 @@ InputHandler::~InputHandler()
 
 }
 
-void InputHandler::handleInput(SDL_Event & event)
+void InputHandler::handleInput(SDL_Event & event, SDL_Rect * rect)
 {
 
 	switch (event.type)
