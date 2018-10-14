@@ -51,12 +51,15 @@ void InputHandler::handleInput(SDL_Event & event, SDL_Rect * rect)
 
 		case SDLK_1:
 			fsm.jumping();
+			rect->x = 255;
 			break;
 		case SDLK_2:
 			fsm.climbing();
+			rect->x = 170;
 			break;
 		case SDLK_3:
 			fsm.idle();
+			rect->x = 85;
 			break;
 
 

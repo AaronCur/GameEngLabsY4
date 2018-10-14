@@ -36,12 +36,12 @@ bool init()
 {
 	//Initialization flag
 	bool success = true;
-	sourceRect.x = 100;
-	sourceRect.y = 100;
+	sourceRect.x = 200;
+	sourceRect.y = 200;
 	sourceRect.w = 100;
 	sourceRect.y = 100;
 
-	destRect.x = 0;
+	destRect.x = 170;
 	destRect.y = 0;
 	destRect.w = 85;
 	destRect.h = 85;
@@ -171,7 +171,7 @@ int main(int argc, char* args[])
 				//Handle events on queue
 				while (SDL_PollEvent(&e) != 0)
 				{
-					handler->handleInput(e, &sourceRect);
+					handler->handleInput(e, &destRect);
 					//User requests quit
 					if (e.type == SDL_QUIT)
 					{
