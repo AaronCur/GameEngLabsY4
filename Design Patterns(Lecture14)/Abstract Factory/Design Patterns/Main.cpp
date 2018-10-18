@@ -8,7 +8,9 @@ int main() {
 	charachters.push_back(factory->CreatePlayer());
 	charachters.push_back(factory->CreateOpponents());
 
-	for (int i = 0; i < charachters.size(); i++){
+	for (int i = 0; i < charachters.size(); i++)
+	
+	{
 
 		charachters[i]->draw();
 
