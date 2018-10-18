@@ -11,6 +11,12 @@
 #include "Animation.h"
 
 #include <SDL.h>
+enum Action
+{
+	IDLE,
+	JUMPING,
+	CLIMBING
+};
 
 class InputHandler
 {
@@ -18,7 +24,11 @@ public:
 	InputHandler();
 	~InputHandler();
 
-	void handleInput(SDL_Event & event, SDL_Rect * rect);
+	void handleInput(SDL_Event & event);
+	Action getCurrentAction();
+	void setCurrentAction(Action a);
+
+	
 
 private:
 	Command * buttonX_;
@@ -27,6 +37,8 @@ private:
 	Command * buttonB_;
 	Command * buttonD_;
 	MacroCommand * macro;
+	std::string m_currentState;
 
 	Animation fsm;
+	Action m_currentAction;
 };

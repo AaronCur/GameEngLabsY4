@@ -9,14 +9,26 @@ InputHandler::InputHandler()
 	buttonD_ = new ShieldCommand();
 	macro = new MacroCommand();
 
+	m_currentAction = IDLE;
+
 }
 
 InputHandler::~InputHandler()
 {
 
 }
+Action InputHandler::getCurrentAction()
+{
+	return m_currentAction;
+}
+void InputHandler::setCurrentAction(Action a)
+{
+	m_currentAction = a;
+}
 
-void InputHandler::handleInput(SDL_Event & event, SDL_Rect * rect)
+
+
+void InputHandler::handleInput(SDL_Event & event)
 {
 
 	switch (event.type)
@@ -51,15 +63,15 @@ void InputHandler::handleInput(SDL_Event & event, SDL_Rect * rect)
 
 		case SDLK_1:
 			fsm.jumping();
-			rect->x = 255;
+			setCurrentAction(JUMPING);
 			break;
 		case SDLK_2:
 			fsm.climbing();
-			rect->x = 170;
+			setCurrentAction(CLIMBING);
 			break;
 		case SDLK_3:
 			fsm.idle();
-			rect->x = 85;
+			setCurrentAction(IDLE);
 			break;
 
 

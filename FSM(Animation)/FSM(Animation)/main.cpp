@@ -7,7 +7,7 @@
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
-const int SPRITE_SIZE = 510;
+//const int SPRITE_SIZE = 510;
 //Starts up SDL and creates window
 bool init();
 
@@ -31,20 +31,23 @@ SDL_Surface* gImageSurface = NULL;
 
 SDL_Rect sourceRect;
 SDL_Rect destRect;
+InputHandler * handler = new InputHandler();
+
+int m_count = 0;
 
 bool init()
 {
 	//Initialization flag
 	bool success = true;
 	sourceRect.x = 200;
-	sourceRect.y = 200;
+	sourceRect.y = -100;
 	sourceRect.w = 100;
 	sourceRect.y = 100;
 
-	destRect.x = 170;
+	destRect.x = 0;
 	destRect.y = 0;
-	destRect.w = 85;
-	destRect.h = 85;
+	destRect.w = 210;
+	destRect.h = 265.6;
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -87,7 +90,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Load PNG surface
-	gImageSurface = loadSurface("grid.png");
+	gImageSurface = loadSurface("spritesheet2.png");
 	if (gImageSurface == NULL)
 	{
 		printf("Failed to load PNG image!\n");
@@ -141,7 +144,7 @@ SDL_Surface* loadSurface(std::string path)
 
 int main(int argc, char* args[])
 {
-	InputHandler * handler = new InputHandler();
+	
 	//Start up SDL and create window
 	if (!init())
 	{
@@ -171,13 +174,41 @@ int main(int argc, char* args[])
 				//Handle events on queue
 				while (SDL_PollEvent(&e) != 0)
 				{
-					handler->handleInput(e, &destRect);
+					handler->handleInput(e);
 					//User requests quit
 					if (e.type == SDL_QUIT)
 					{
 						quit = true;
 					}
 				}
+				switch (handler->getCurrentAction())
+				{
+				case JUMPING:
+					destRect.y = 0;
+					break;
+				case IDLE:
+					destRect.y = 531.3;
+					break;
+				case CLIMBING:
+					destRect.y = 265.6;
+					break;
+
+				}
+				m_count++;
+				if (m_count >= 1500)
+				{
+					
+					destRect.x = destRect.x + 210;
+					if (destRect.x > 2092)
+					{
+					destRect.x = 0;
+					}
+					m_count = 0;
+					
+				}
+
+			
+				
 
 				//Apply the PNG image
 				SDL_BlitSurface(gImageSurface, &destRect, gScreenSurface, &sourceRect);
@@ -185,8 +216,6 @@ int main(int argc, char* args[])
 				//Update the surface
 				SDL_UpdateWindowSurface(gWindow);
 
-				//Wait two seconds
-				SDL_Delay(2000);
 			}
 		}
 	}
