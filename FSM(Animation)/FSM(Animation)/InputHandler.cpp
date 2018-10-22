@@ -28,7 +28,7 @@ void InputHandler::setCurrentAction(Action a)
 
 
 
-void InputHandler::handleInput(SDL_Event & event)
+void InputHandler::handleInput(SDL_Event & event, SDL_Rect &destRect)
 {
 
 	switch (event.type)
@@ -62,14 +62,25 @@ void InputHandler::handleInput(SDL_Event & event)
 
 
 		case SDLK_1:
-			fsm.jumping();
-			setCurrentAction(JUMPING);
+			
+			if (getCurrentAction() == IDLE)
+			{
+				destRect.y = 0;
+				fsm.jumping();
+				setCurrentAction(JUMPING);
+			}
 			break;
 		case SDLK_2:
-			fsm.climbing();
-			setCurrentAction(CLIMBING);
+			if (getCurrentAction() == IDLE)
+			{
+
+				destRect.y = 265.6;
+				fsm.climbing();
+				setCurrentAction(CLIMBING);
+			}
 			break;
 		case SDLK_3:
+			destRect.y = 531.3;
 			fsm.idle();
 			setCurrentAction(IDLE);
 			break;

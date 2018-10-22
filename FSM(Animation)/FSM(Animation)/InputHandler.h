@@ -24,7 +24,7 @@ public:
 	InputHandler();
 	~InputHandler();
 
-	void handleInput(SDL_Event & event);
+	void handleInput(SDL_Event & event, SDL_Rect &destRect);
 	Action getCurrentAction();
 	void setCurrentAction(Action a);
 

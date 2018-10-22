@@ -174,26 +174,14 @@ int main(int argc, char* args[])
 				//Handle events on queue
 				while (SDL_PollEvent(&e) != 0)
 				{
-					handler->handleInput(e);
+					handler->handleInput(e, destRect);
 					//User requests quit
 					if (e.type == SDL_QUIT)
 					{
 						quit = true;
 					}
 				}
-				switch (handler->getCurrentAction())
-				{
-				case JUMPING:
-					destRect.y = 0;
-					break;
-				case IDLE:
-					destRect.y = 531.3;
-					break;
-				case CLIMBING:
-					destRect.y = 265.6;
-					break;
 
-				}
 				m_count++;
 				if (m_count >= 1500)
 				{
