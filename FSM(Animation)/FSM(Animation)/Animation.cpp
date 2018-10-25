@@ -5,17 +5,17 @@ Animation::Animation()
 	m_current = new Idle();
 }
 
-void Animation::idle()
+void Animation::idle(SDL_Rect &destRect)
 {
-	m_current->idle(this);
+	m_current->idle(this, destRect);
 }
-void Animation::jumping()
+void Animation::jumping(SDL_Rect &destRect)
 {
-	m_current->jumping(this);
+	m_current->jumping(this, destRect);
 }
-void Animation::climbing()
+void Animation::climbing(SDL_Rect &destRect)
 {
-	m_current->climbing(this);
+	m_current->climbing(this, destRect);
 }
 
 void Animation::setCurrent(State* s)

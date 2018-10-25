@@ -7,7 +7,7 @@ public:
 	Idle() {};
 	~Idle() {};
 
-	void jumping(Animation* a);
-	void climbing(Animation* a);
+	void jumping(Animation* a, SDL_Rect &destRect);
+	void climbing(Animation* a, SDL_Rect &destRect);
 
 };

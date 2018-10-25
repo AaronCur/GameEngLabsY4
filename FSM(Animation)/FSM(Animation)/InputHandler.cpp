@@ -63,26 +63,15 @@ void InputHandler::handleInput(SDL_Event & event, SDL_Rect &destRect)
 
 		case SDLK_1:
 			
-			if (getCurrentAction() == IDLE)
-			{
-				destRect.y = 0;
-				fsm.jumping();
-				setCurrentAction(JUMPING);
-			}
+			fsm.jumping(destRect);
+			
 			break;
 		case SDLK_2:
-			if (getCurrentAction() == IDLE)
-			{
+			fsm.climbing(destRect);
 
-				destRect.y = 265.6;
-				fsm.climbing();
-				setCurrentAction(CLIMBING);
-			}
 			break;
 		case SDLK_3:
-			destRect.y = 531.3;
-			fsm.idle();
-			setCurrentAction(IDLE);
+			fsm.idle(destRect);
 			break;
 
 
