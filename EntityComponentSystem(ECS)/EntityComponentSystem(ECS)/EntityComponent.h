@@ -8,6 +8,7 @@ public:
 	Entity() {};
 	void addComponent(Component c) {
 
+		components.push_back(c);
 	}
 	void removeComponent(Component c) {
 		/*TBI*/
