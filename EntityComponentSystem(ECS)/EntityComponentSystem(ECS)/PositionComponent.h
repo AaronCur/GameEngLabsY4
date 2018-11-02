@@ -3,7 +3,7 @@
 #include "Component.h"
 class PositionComponent : public Component
 {
-	int id;
+	
 public:
 	PositionComponent() : positionX(100.0f), positionY(100.0f) {};
 
@@ -20,7 +20,12 @@ public:
 		this->positionX = x;
 		this->positionY = y;
 	}
+	int getID()
+	{
+		return id;
+	}
 private:
 	float positionX;
 	float positionY;
+	int id = 2;
 };

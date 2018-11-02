@@ -1,22 +1,24 @@
 #pragma once
 #include <vector>
 #include "Component.h"
+#include "HealthComponent.h"
+#include "PositionComponent.h"
 class Entity
 {
 	int id;
 public:
 	Entity() {};
-	void addComponent(Component c) {
+	void addComponent(Component* c) {
 
 		components.push_back(c);
 	}
-	void removeComponent(Component c) {
+	void removeComponent(Component* c) {
 		/*TBI*/
 	}
-	std::vector<Component> getComponents() {
+	std::vector<Component*> getComponents() {
 
 		return components;
 	}
 private:
-	std::vector<Component> components;
+	std::vector<Component*> components;
 };

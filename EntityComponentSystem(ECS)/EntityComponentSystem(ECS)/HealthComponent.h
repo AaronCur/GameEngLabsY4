@@ -3,7 +3,7 @@
 #include "Component.h"
 class HealthComponent: public Component
 {
-	int id;
+	
 public:
 	HealthComponent() : health(100) {};
 
@@ -14,7 +14,13 @@ public:
 
 	void setHealth(int health) {
 		this->health = health;
+		std::cout << this->health << std::endl;
+	}
+	int getID()
+	{
+		return id;
 	}
 private:
 	int health;
+	int id = 1;
 };

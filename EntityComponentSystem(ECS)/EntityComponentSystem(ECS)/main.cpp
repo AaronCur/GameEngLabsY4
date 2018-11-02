@@ -7,17 +7,38 @@
 int main(void*)
 {
 	Entity player;
-	HealthComponent hc;
-	PositionComponent pc;
+	player.addComponent(new HealthComponent());
+	player.addComponent(new PositionComponent());
 
-	player.addComponent(hc);
-	player.addComponent(pc);
+
+	Entity alien;
+	alien.addComponent(new HealthComponent());
+	alien.addComponent(new PositionComponent());
+
+	Entity dog;
+	dog.addComponent(new HealthComponent());
+	dog.addComponent(new PositionComponent());
+
+	Entity cat;
+	cat.addComponent(new HealthComponent());
+	cat.addComponent(new PositionComponent());
+	//HealthComponent *hc;
+	//PositionComponent *pc;
+
+	
 
 	HealthSystem hs; 
 	PositionSystem ps;
 
 	hs.addEntity(player);
+	hs.addEntity(alien);
+	hs.addEntity(dog);
+	hs.addEntity(cat);
+
 	ps.addEntity(player);
+	ps.addEntity(alien);
+	ps.addEntity(dog);
+	ps.addEntity(cat);
 
 
 	while (true)
