@@ -17,11 +17,11 @@ void RenderSystem::update() {
 		//Render texture to screen
 		for (Component * component : entity.getComponents()) {
 			if (component->getID() == 2) {
-				std::cout << "Checking position component of entity " << index << std::endl;
+				std::cout << "Checking position component of entity " << entity.getName() << std::endl;
 			}
 
 		}
-		std::cout << "Drawing entity " << index << std::endl;
+		std::cout << "Drawing entity: " << entity.getName() << std::endl;
 
 		index++;
 	}

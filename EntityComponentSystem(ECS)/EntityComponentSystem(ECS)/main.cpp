@@ -1,3 +1,4 @@
+
 #include "EntityComponent.h"
 #include "Component.h"
 #include "HealthSystem.h"
@@ -6,62 +7,250 @@
 #include "PositionSystem.h"
 #include "RenderSystem.h"
 #include "AISystem.h"
-int main(void*)
+#include "ControlSystem.h"
+#include <SDL.h>
+#include <stdio.h>
+#include <SDL_image.h>
+#include <SDL.h>
+#include <stdio.h>
+
+//Screen dimension constants
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+//const int SPRITE_SIZE = 510;
+//Starts up SDL and creates window
+bool init();
+
+//Loads media
+bool loadMedia();
+
+//Frees media and shuts down SDL
+void close();
+
+//Loads individual image
+SDL_Surface* loadSurface(std::string path);
+
+//The window we'll be rendering to
+SDL_Window* gWindow = NULL;
+
+//The surface contained by the window
+SDL_Surface* gScreenSurface = NULL;
+
+//Current displayed PNG image
+SDL_Surface* gImageSurface = NULL;
+
+SDL_Rect sourceRect;
+SDL_Rect destRect;
+
+
+int m_count = 0;
+
+bool init()
 {
-	Entity player;
-	player.addComponent(new HealthComponent());
-	player.addComponent(new PositionComponent());
-//	player.addComponent(new ControlComponent());
+	//Initialization flag
+	bool success = true;
 
+	sourceRect.x = 200;
+	sourceRect.y = -100;
+	sourceRect.w = 100;
+	sourceRect.y = 100;
 
-	Entity alien;
-	alien.addComponent(new HealthComponent());
-	alien.addComponent(new PositionComponent());
+	destRect.x = 0;
+	destRect.y = 0;
+	destRect.w = 210;
+	destRect.h = 265.6;
 
-	Entity dog;
-	dog.addComponent(new HealthComponent());
-	dog.addComponent(new PositionComponent());
-
-	Entity cat;
-	cat.addComponent(new HealthComponent());
-	cat.addComponent(new PositionComponent());
-	//HealthComponent *hc;
-	//PositionComponent *pc;
-
-	HealthSystem hs; 
-	PositionSystem ps;
-	RenderSystem rs;
-	AiSystem ais;
-
-	hs.addEntity(player);
-	hs.addEntity(alien);
-	hs.addEntity(dog);
-	hs.addEntity(cat);
-
-	ps.addEntity(player);
-	ps.addEntity(alien);
-	ps.addEntity(dog);
-	ps.addEntity(cat);
-
-	rs.addEntity(player);
-	rs.addEntity(alien);
-	rs.addEntity(dog);
-	rs.addEntity(cat);
-
-	ais.addEntity(alien);
-	ais.addEntity(dog);
-	ais.addEntity(cat);
-
-
-
-	//SDL_Event event;
-	while (true)
+	//Initialize SDL
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		//hs.update();
-		//ps.update();
-		//rs.update();
-		ais.update();
-		//cs.update(event);
+		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
+		success = false;
 	}
-	
+	else
+	{
+		//Create window
+		gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		if (gWindow == NULL)
+		{
+			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
+			success = false;
+		}
+		else
+		{
+			//Initialize PNG loading
+			int imgFlags = IMG_INIT_PNG;
+			if (!(IMG_Init(imgFlags) & imgFlags))
+			{
+				printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+				success = false;
+			}
+			else
+			{
+				//Get window surface
+				gScreenSurface = SDL_GetWindowSurface(gWindow);
+			}
+		}
+	}
+
+	return success;
+}
+
+bool loadMedia()
+{
+	//Loading success flag
+	bool success = true;
+
+	//Load PNG surface
+	/*gImageSurface = loadSurface("spritesheet2.png");
+	if (gImageSurface == NULL)
+	{
+		printf("Failed to load PNG image!\n");
+		success = false;
+	}
+*/
+	return success;
+}
+
+void close()
+{
+	//Free loaded image
+	SDL_FreeSurface(gImageSurface);
+	gImageSurface = NULL;
+
+	//Destroy window
+	SDL_DestroyWindow(gWindow);
+	gWindow = NULL;
+
+	//Quit SDL subsystems
+	IMG_Quit();
+	SDL_Quit();
+}
+
+SDL_Surface* loadSurface(std::string path)
+{
+	//The final optimized image
+	SDL_Surface* optimizedSurface = NULL;
+
+	//Load image at specified path
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+	if (loadedSurface == NULL)
+	{
+		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+	}
+	else
+	{
+		//Convert surface to screen format
+		optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, NULL);
+		if (optimizedSurface == NULL)
+		{
+			printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+		}
+
+		//Get rid of old loaded surface
+		SDL_FreeSurface(loadedSurface);
+	}
+
+	return optimizedSurface;
+}
+
+int main(int argc, char* args[])
+{
+
+	//Start up SDL and create window
+	if (!init())
+	{
+		printf("Failed to initialize!\n");
+	}
+	else
+	{
+		//Load media
+		if (!loadMedia())
+		{
+			printf("Failed to load media!\n");
+		}
+		else
+		{
+
+
+			//Main loop flag
+			bool quit = false;
+
+			//Event handler
+			SDL_Event e;
+
+			Entity player("Player");
+			player.addComponent(new HealthComponent(200));
+			player.addComponent(new PositionComponent(100,100));
+			player.addComponent(new ControlComponent());
+
+
+			Entity alien("Alien");
+			alien.addComponent(new HealthComponent(60));
+			alien.addComponent(new PositionComponent(200,500));
+
+			Entity dog("Dog");
+			dog.addComponent(new HealthComponent(150));
+			dog.addComponent(new PositionComponent(400,500));
+
+			Entity cat("Cat");
+			cat.addComponent(new HealthComponent(90));
+			cat.addComponent(new PositionComponent(1000,500));
+			//HealthComponent *hc;
+			//PositionComponent *pc;
+
+			HealthSystem hs;
+			RenderSystem rs;
+			AiSystem ais;
+			ControlSystem cs;
+
+			hs.addEntity(player);
+			hs.addEntity(alien);
+			hs.addEntity(dog);
+			hs.addEntity(cat);
+
+
+			rs.addEntity(player);
+			rs.addEntity(alien);
+			rs.addEntity(dog);
+			rs.addEntity(cat);
+
+			ais.addEntity(alien);
+			ais.addEntity(dog);
+			ais.addEntity(cat);
+
+			cs.addEntity(player);
+
+			//While application is running
+			while (!quit)
+			{
+				//Handle events on queue
+				while (SDL_PollEvent(&e) != 0)
+				{
+					cs.input(e);
+
+					//User requests quit
+					if (e.type == SDL_QUIT)
+					{
+						quit = true;
+					}
+				}
+				ais.update();
+				//hs.update();
+				//rs.update();
+				
+
+				//Apply the PNG image
+				SDL_BlitSurface(gImageSurface, &destRect, gScreenSurface, &sourceRect);
+
+				//Update the surface
+				SDL_UpdateWindowSurface(gWindow);
+
+			}
+		}
+	}
+
+	//Free resources and close SDL
+	close();
+
+	return 0;
 }

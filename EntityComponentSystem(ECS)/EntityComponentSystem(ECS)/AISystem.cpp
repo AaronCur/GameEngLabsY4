@@ -14,28 +14,38 @@ void AiSystem::addEntity(Entity e)
 /// </summary>
 void AiSystem::update()
 {
+	int index = 0;
+	std::cout << "AI SYSTEM:" << std::endl;
+
 	for (Entity& entity : m_entities) {
 
 		for (Component* component : entity.getComponents()) {
 			if (component->getID() == 2) {
 				posComp = dynamic_cast<PositionComponent*>(component);
+
+				x = posComp->getPositionX();
+				y = posComp->getPositionY();
+
+				y -= speed;
+				x -= speed;
+				checkBoundary();
+				std::pair<float, float> m_pos = { x, y };
+				posComp->setPosition(x, y);
+
+				index++;
+
+				std::cout << "Updating position component of entity: " << entity.getName() << std::endl;
+				std::cout << "AI posX: " << posComp->getPositionX() << " posY:" << posComp->getPositionY() << std::endl;
 			}
 		}
 
-		x = posComp->getPositionX();
-		y = posComp->getPositionY();
-
-		y -= speed;
-		x -= speed;
-		checkBoundary();
-		std::pair<float, float> m_pos = { x, y };
-		posComp->setPosition(x, y);
+		
 	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
 }
 
-/// <summary>
-/// simple boundary checking.
-/// </summary>
 void AiSystem::checkBoundary()
 {
 	if (x > screenWidth)

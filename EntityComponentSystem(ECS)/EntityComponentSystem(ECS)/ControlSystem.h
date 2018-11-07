@@ -11,7 +11,7 @@ class ControlSystem
 public:
 	ControlSystem();
 	void addEntity(Entity e);
-	void update(SDL_Event & e);
+	void update();
 	void input(SDL_Event & e);
 private:
 	std::vector<Entity> entities;

@@ -5,14 +5,14 @@ class PositionComponent : public Component
 {
 	
 public:
-	PositionComponent() : positionX(100.0f), positionY(100.0f) {};
+	PositionComponent(float posX, float posY) : positionX(posX), positionY(posY) {};
 
 	/*Data only*/
-	int getPositionX() {
+	float getPositionX() {
 		return positionX;
 	}
 
-	int getPositionY() {
+	float getPositionY() {
 		return positionY;
 	}
 

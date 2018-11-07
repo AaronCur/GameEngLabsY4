@@ -8,44 +8,53 @@ void ControlSystem::addEntity(Entity e) {
 	entities.push_back(e);
 }
 
-void ControlSystem::input(SDL_Event & event) {
-	
+void ControlSystem::input(SDL_Event &e) {
+
 	for (Entity& entity : entities) {
 		for (Component* component : entity.getComponents()) {
 			if (component->getID() == 3) {
 				controlComp = dynamic_cast<ControlComponent*>(component);
-				switch (event.type) {
-				case SDL_KEYDOWN:
-					switch (event.key.keysym.sym)
-					{
-					case SDLK_UP:
-						controlComp->setDirection(controlComp->Up);
-						break;
-					case SDLK_DOWN:
-						controlComp->setDirection(controlComp->Down);
-						break;
-					case SDLK_LEFT:
-						controlComp->setDirection(controlComp->Left);
-						break;
-					case SDLK_RIGHT:
-						controlComp->setDirection(controlComp->Right);
-						break;
-					default:
-						controlComp->setDirection(controlComp->Idle);
-						break;
-					}
-				
-				}
 			}
+
+		}
+		switch (e.type)
+		{
+		case SDL_KEYDOWN:
+			switch (e.key.keysym.sym)
+			{
+			case SDLK_UP:
+				controlComp->setDirection(controlComp->Up);
+				break;
+			case SDLK_DOWN:
+				controlComp->setDirection(controlComp->Down);
+				break;
+			case SDLK_LEFT:
+				controlComp->setDirection(controlComp->Left);
+				break;
+			case SDLK_RIGHT:
+				controlComp->setDirection(controlComp->Right);
+				break;
+			default:
+				controlComp->setDirection(controlComp->Idle);
+				break;
+
+			}
+
+			update();
+
 		}
 	}
+
+
+	
+
 }
 
 
-void ControlSystem::update(SDL_Event & e) {
+void ControlSystem::update() {
 	
-
-
+	std::cout << "CONTROL SYSTEM: " << std::endl;
+	int index = 0;
 	for (Entity& entity : entities) {
 
 		for (Component* component : entity.getComponents()) {
@@ -60,10 +69,11 @@ void ControlSystem::update(SDL_Event & e) {
 			}
 		}
 
+		index++;
 		x = posComp->getPositionX();
 		y = posComp->getPositionY();
 
-		input(e);
+		
 		if (controlComp->getDirection() == controlComp->Up) {
 			y -= speed;
 		}
@@ -81,24 +91,10 @@ void ControlSystem::update(SDL_Event & e) {
 		}
 		posComp->setPosition(x, y);
 		
+		std::cout << "Updated position component of entity: " << entity.getName() << std::endl;
+		std::cout << "PosX: " << posComp->getPositionX() << " PosY: " << posComp->getPositionY() << std::endl;
 
-		/*switch (controlComp->m_currentDirection) {
-		case Direction::Up:
-			y -= speed;
-			break;
-		case Direction::Down:
-			y+= speed
-			break;
-		case Direction::Left:
-			
-			break;
-		case Direction::Right:
-			controlComp->setDirection(controlComp->Right);
-			break;
-		default:
-			controlComp->setDirection(controlComp->Idle);
-			break;*/
-
-		
 	}
+	std::cout << std::endl;
+	std::cout << std::endl;
 }

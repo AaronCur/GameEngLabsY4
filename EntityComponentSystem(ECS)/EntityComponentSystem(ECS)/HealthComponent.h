@@ -5,7 +5,7 @@ class HealthComponent: public Component
 {
 	
 public:
-	HealthComponent() : health(100) {};
+	HealthComponent(int startHealth) : health(startHealth) {};
 
 	/*Data only*/
 	int getHealth() {
@@ -14,7 +14,6 @@ public:
 
 	void setHealth(int health) {
 		this->health = health;
-		std::cout << this->health << std::endl;
 	}
 	int getID()
 	{

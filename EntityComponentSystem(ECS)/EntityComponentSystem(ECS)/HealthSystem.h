@@ -5,6 +5,7 @@
 class HealthSystem
 {
 	std::vector<Entity> entities;
+	HealthComponent * healthComp;
 
 public:
 	void addEntity(Entity e) {
@@ -13,7 +14,9 @@ public:
 
 	}
 	void update() {
-		//std::cout << "HealthSystem Update" << std::endl;
+		std::cout << "HEALTH SYSTEM: " << std::endl;
+
+		int index = 0;
 
 		/* HealthComponents and Update */
 		/* Loop through Entities with */
@@ -24,21 +27,35 @@ public:
 				//only update health components
 				if (component->getID() == 1)
 				{
+					index++;
 					//Get current health
+					healthComp = dynamic_cast<HealthComponent*>(component);
+					int healthVal = healthComp->getHealth();
+					if (healthVal > 0)
+					{
 
-					int healthVal = dynamic_cast<HealthComponent*>(component)->getHealth();
-					healthVal = healthVal - 1;
-					////Update health value of health component
-					dynamic_cast<HealthComponent*>(component)->setHealth(healthVal);
+						healthVal = healthVal - 1;
+						////Update health value of health component
+						healthComp->setHealth(healthVal);
 
-					std::cout << "Updated entity health component" << std::endl;
+						std::cout << "Updated health component of entity: " << entity.getName() << std::endl;
+						std::cout << "Health: " << healthComp->getHealth() << std::endl;
+					}
+					else
+					{
+						std::cout << "Entity " << entity.getName() << " has 0 health" << std::endl;
+					}
+					
+					
+
+					
+					
 
 				}
 			}
 		}
 		
-		/* Loop through Entities with */
-		/* HealthComponents and Update */
-		/* TBI */
+		std::cout << std::endl;
+		std::cout << std::endl;
 	}
 };

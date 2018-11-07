@@ -15,9 +15,11 @@ public:
 	void update() {
 		//std::cout << "PositionSystem Update" << std::endl;
 
-
+		std::cout << "POSITION SYSTEM" << std::endl;
 		/* Position Components and Update */
 		/* Loop through Entities with */
+		int index = 0;
+
 		for (Entity & entity : entities) {
 
 			//Loop through all entities 
@@ -30,7 +32,7 @@ public:
 					int posX = dynamic_cast<PositionComponent*>(component)->getPositionX();
 					int posY = dynamic_cast<PositionComponent*>(component)->getPositionY();
 
-					std::cout << "Checking Entity position componenet" << std::endl;
+					std::cout << "Checking position componenet of entity" << std::endl;
 
 				}
 			}
