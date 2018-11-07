@@ -4,11 +4,14 @@
 #include "HealthComponent.h"
 #include "PositionComponent.h"
 #include "PositionSystem.h"
+#include "RenderSystem.h"
+#include "AISystem.h"
 int main(void*)
 {
 	Entity player;
 	player.addComponent(new HealthComponent());
 	player.addComponent(new PositionComponent());
+//	player.addComponent(new ControlComponent());
 
 
 	Entity alien;
@@ -25,10 +28,10 @@ int main(void*)
 	//HealthComponent *hc;
 	//PositionComponent *pc;
 
-	
-
 	HealthSystem hs; 
 	PositionSystem ps;
+	RenderSystem rs;
+	AiSystem ais;
 
 	hs.addEntity(player);
 	hs.addEntity(alien);
@@ -40,10 +43,25 @@ int main(void*)
 	ps.addEntity(dog);
 	ps.addEntity(cat);
 
+	rs.addEntity(player);
+	rs.addEntity(alien);
+	rs.addEntity(dog);
+	rs.addEntity(cat);
 
+	ais.addEntity(alien);
+	ais.addEntity(dog);
+	ais.addEntity(cat);
+
+
+
+	//SDL_Event event;
 	while (true)
 	{
-		hs.update();
-		ps.update();
+		//hs.update();
+		//ps.update();
+		//rs.update();
+		ais.update();
+		//cs.update(event);
 	}
+	
 }

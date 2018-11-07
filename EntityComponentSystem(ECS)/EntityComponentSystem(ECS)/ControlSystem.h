@@ -6,10 +6,21 @@
 
 class ControlSystem
 {
-	std::vector<Entity> m_entities;
+	
 
 public:
 	ControlSystem();
 	void addEntity(Entity e);
 	void update(SDL_Event & e);
+	void input(SDL_Event & e);
+private:
+	std::vector<Entity> entities;
+	PositionComponent* posComp;
+	ControlComponent* controlComp;
+
+	float x = 0;
+	float y = 0;
+	float speed = 2;
+	int windowWidth = 1280;
+	int windowHeight = 720;
 };

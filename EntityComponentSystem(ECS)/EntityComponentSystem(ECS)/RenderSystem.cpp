@@ -4,28 +4,28 @@ RenderSystem::RenderSystem() {
 
 }
 
-void RenderSystem::addEntity(Entity* e) {
-	m_entities.push_back(e);
+void RenderSystem::addEntity(Entity e) {
+	entities.push_back(e);
 }
 
 void RenderSystem::update() {
 	int index = 0;
 
-	cout << "RENDER SYSTEM:" << endl;
-	for (Entity * entity : m_entities) {
+	std::cout << "RENDER SYSTEM:" << std::endl;
+	for (Entity & entity : entities) {
 
 		//Render texture to screen
-		for (Component * component : entity->getComponents()) {
-			if (component->id = 2) {
-				cout << "Checking position component of entity " << index << endl;
+		for (Component * component : entity.getComponents()) {
+			if (component->getID() == 2) {
+				std::cout << "Checking position component of entity " << index << std::endl;
 			}
 
 		}
-		cout << "Drawing entity " << index << endl;
+		std::cout << "Drawing entity " << index << std::endl;
 
 		index++;
 	}
-	cout << endl;
-	cout << endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
 
 }

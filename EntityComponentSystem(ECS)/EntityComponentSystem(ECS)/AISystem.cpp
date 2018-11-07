@@ -16,9 +16,9 @@ void AiSystem::update()
 {
 	for (Entity& entity : m_entities) {
 
-		for (Component* comp : entity.getComponents()) {
-			if (comp->getID == 2) {
-				posComp = dynamic_cast<PositionComponent*>(comp);
+		for (Component* component : entity.getComponents()) {
+			if (component->getID() == 2) {
+				posComp = dynamic_cast<PositionComponent*>(component);
 			}
 		}
 
@@ -26,7 +26,7 @@ void AiSystem::update()
 		y = posComp->getPositionY();
 
 		y -= speed;
-
+		x -= speed;
 		checkBoundary();
 		std::pair<float, float> m_pos = { x, y };
 		posComp->setPosition(x, y);
