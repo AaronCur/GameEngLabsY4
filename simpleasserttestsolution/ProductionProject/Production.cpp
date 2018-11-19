@@ -27,3 +27,31 @@ bool Production::testRange(std::vector<int> v) {
 	return 1;
 
 }
+
+
+bool Production::testRangeVal(int val) {
+
+
+	if (val <= 46 && val >= 1)
+	{
+		return 1;
+	}
+
+	return 0;
+
+}
+
+bool Production::testRecurringVal(std::vector<int> v, int val) {
+
+
+	for(int i = 0; i < v.size(); i++)
+	{
+		if (val == v[i]) {
+
+			return(0);
+		}
+	}
+
+	return 1;
+
+}
