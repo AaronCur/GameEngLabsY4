@@ -10,7 +10,6 @@ void enterNumbers(std::vector<int>& m_picked) {
 	int a, b, c, d, e, f;
 	m_picked.clear();
 
-
 	std::cin >> a;
 	m_picked.push_back(a);
 	std::cin >> b;
@@ -24,7 +23,6 @@ void enterNumbers(std::vector<int>& m_picked) {
 	std::cin >> f;
 	m_picked.push_back(f);
 	std::cout << "\n" << std::endl;
-
 
 }
 
@@ -89,7 +87,6 @@ int main()
 		enterNumbers(m_picked);
 	}
 
-	std::cout << "\n" << std::endl;
 	std::cout << "Here are this weeks winning lotto numbers" << std::endl;
 
 	for (int i = 0; i < m_lottoNum.size(); i++) {
